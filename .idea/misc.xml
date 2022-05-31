@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/bottomnaviback.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/drawablefavorite.xml" value="0.14947916666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/favoriteselector.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.14947916666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.14947916666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.14947916666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/selectedbotnavitem.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_main.xml" value="0.3363994743758213" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_home.xml" value="0.13385416666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
