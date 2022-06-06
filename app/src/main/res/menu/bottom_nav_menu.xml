@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/navigation_camerax"
-        android:icon="@drawable/ic_baseline_photo_camera_24"
+        android:icon="@drawable/cameraselector"
         tools:ignore="MenuTitle" />
 
     <item

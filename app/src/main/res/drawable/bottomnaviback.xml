@@ -8,7 +8,7 @@
         />
 
     <solid
-        android:color="?attr/backgroundColor"/>
+        android:color="@color/white"/>
 
     <stroke
         android:width="0.5dp"

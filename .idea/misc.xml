@@ -3,20 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable-v24/ic_switch_camera.xml" value="0.1" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/bottomnaviback.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/cameraselector.xml" value="0.24351851851851852" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/drawablefavorite.xml" value="0.14947916666666666" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/favoriteselector.xml" value="0.2755208333333333" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.14947916666666666" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.14947916666666666" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.14947916666666666" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_photo_camera_24_selected.xml" value="0.24351851851851852" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.26851851851851855" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2755208333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/roundcorner.xml" value="0.26851851851851855" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/roundcornerwhite.xml" value="0.2755208333333333" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/selectedbotnavitem.xml" value="0.2755208333333333" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_main.xml" value="0.3363994743758213" />
-        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_camera_x.xml" value="0.13385416666666666" />
-        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_favorite.xml" value="0.11979166666666667" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_camera_x.xml" value="0.2" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_favorite.xml" value="0.12962962962962962" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_home.xml" value="0.13385416666666666" />
-        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_search.xml" value="0.13333333333333333" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_search.xml" value="0.2" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/item_loading.xml" value="0.264" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/item_row_product.xml" value="0.264" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/item_row_user.xml" value="0.1" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
       </map>
     </option>

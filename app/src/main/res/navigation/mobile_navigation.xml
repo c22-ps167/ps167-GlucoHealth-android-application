@@ -3,20 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_search">
+    app:startDestination="@+id/navigation_camerax">
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.glucohealth.ui.SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        android:name="com.example.glucohealth.ui.fragment.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="@string/lbl_search"/>
 
     <fragment
         android:id="@+id/navigation_camerax"
-        android:name="com.example.glucohealth.ui.CameraXFragment"
-        tools:layout="@layout/fragment_camera_x" />
+        android:name="com.example.glucohealth.ui.fragment.CameraXFragment"
+        tools:layout="@layout/fragment_camera_x"/>
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.example.glucohealth.ui.FavoriteFragment"
-        tools:layout="@layout/fragment_favorite" />
+        android:name="com.example.glucohealth.ui.fragment.FavoriteFragment"
+        tools:layout="@layout/fragment_favorite"
+        android:label="@string/lbl_favorite"/>
 </navigation>

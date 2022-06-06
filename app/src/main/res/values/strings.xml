@@ -2,4 +2,13 @@
     <string name="app_name">GlucoHealth</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lbl_product">Product Name</string>
+    <string name="hint_search">Search Product…</string>
+    <string name="lbl_settings">SETTINGS</string>
+    <string name="lbl_search">SEARCH</string>
+    <string name="errMessageTimeOut">Timeout</string>
+    <string name="retry">Try Again</string>
+    <string name="lbl_favorite">FAVORITE</string>
+    <string name="failtoshowdata">FAIL TO SHOW DATA</string>
+    <string name="notfound">PRODUCT NOT FOUND</string>
 </resources>
