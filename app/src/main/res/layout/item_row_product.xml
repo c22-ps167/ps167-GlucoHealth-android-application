@@ -20,7 +20,7 @@
             android:layout_height="80dp"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="10dp"
+            android:padding="10dp"
             android:src="@drawable/ic_baseline_settings_24"
             android:id="@+id/img_item_photo"
             tools:ignore="ContentDescription" />

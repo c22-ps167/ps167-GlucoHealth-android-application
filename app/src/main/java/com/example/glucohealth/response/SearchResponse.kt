@@ -40,7 +40,10 @@ data class DataItem(
 	val id: String? = null,
 
 	@field:SerializedName("updatedAt")
-	val updatedAt: Any? = null
+	val updatedAt: Any? = null,
+
+	@field:SerializedName("url")
+	val url: String? = null
 )
 
 data class NutritionFact(

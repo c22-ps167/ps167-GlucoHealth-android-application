@@ -15,15 +15,15 @@ class ObjectDetectionHelper(private val tflite: Interpreter, private val labels:
     private val outputBuffer = mapOf(
         0 to locations,
         1 to labelIndices,
-        2 to scores,
-        3 to FloatArray(1)
+        3 to scores,
+        4 to FloatArray(1)
     )
 
     val predictions get() = (0 until OBJECT_COUNT).map {
         ObjectPrediction(
 
-            location = locations[0][it].let {
-                RectF(it[1], it[0], it[3], it[2])
+            location = locations[0][it].let { location ->
+                RectF(location[1], location[0], location[3], location[2])
             },
 
 
@@ -40,6 +40,6 @@ class ObjectDetectionHelper(private val tflite: Interpreter, private val labels:
     }
 
     companion object {
-        const val OBJECT_COUNT = 10
+        const val OBJECT_COUNT = 3
     }
 }

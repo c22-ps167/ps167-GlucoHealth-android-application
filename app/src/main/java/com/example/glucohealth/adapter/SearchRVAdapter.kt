@@ -16,9 +16,9 @@ class SearchRVAdapter: RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val productList = listProduct[position]
         holder.binding.tvItemUsername.text = productList.name
-//        Glide.with(holder.itemView)
-//            .load(userList.avatarUrl)
-//            .into(holder.binding.imgItemPhoto)
+        Glide.with(holder.itemView)
+            .load(productList.url)
+            .into(holder.binding.imgItemPhoto)
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listProduct[holder.adapterPosition])
