@@ -6,6 +6,7 @@ import org.tensorflow.lite.support.image.TensorImage
 
 class ObjectDetectionHelper(private val tflite: Interpreter, private val labels: List<String>) {
 
+    /** Abstraction object that wraps a prediction output in an easy to parse way */
     data class ObjectPrediction(val location: RectF, val label: String, val score: Float)
 
     private val locations = arrayOf(Array(OBJECT_COUNT) { FloatArray(4) })
@@ -15,8 +16,8 @@ class ObjectDetectionHelper(private val tflite: Interpreter, private val labels:
     private val outputBuffer = mapOf(
         0 to locations,
         1 to labelIndices,
-        3 to scores,
-        4 to FloatArray(1)
+        2 to scores,
+        3 to FloatArray(1)
     )
 
     val predictions get() = (0 until OBJECT_COUNT).map {
@@ -29,7 +30,6 @@ class ObjectDetectionHelper(private val tflite: Interpreter, private val labels:
 
             label = labels[1 + labelIndices[0][it].toInt()],
 
-
             score = scores[0][it]
         )
     }
@@ -40,6 +40,6 @@ class ObjectDetectionHelper(private val tflite: Interpreter, private val labels:
     }
 
     companion object {
-        const val OBJECT_COUNT = 3
+        const val OBJECT_COUNT = 10
     }
 }

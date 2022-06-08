@@ -3,16 +3,21 @@ package com.example.glucohealth.ui.fragment
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.glucohealth.R
 import com.example.glucohealth.databinding.FragmentCameraXBinding
 import com.example.glucohealth.helper.ObjectDetectionHelper
 import org.tensorflow.lite.DataType
@@ -36,7 +41,18 @@ class CameraXFragment : Fragment() {
     private lateinit var bitmapBuffer: Bitmap
 
     private var sudutRotasi = 0
-    private val tfImageBuffer = TensorImage(DataType.FLOAT32)
+    private val tfImageBuffer = TensorImage(DataType.UINT8)
+
+    private val tfImageProcessor by lazy {
+        val cropSize = minOf(bitmapBuffer.width, bitmapBuffer.height)
+        ImageProcessor.Builder()
+            .add(ResizeWithCropOrPadOp(cropSize, cropSize))
+            .add(ResizeOp(
+                tfInputSize.height, tfInputSize.width, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+            .add(Rot90Op(sudutRotasi / 90))
+            .add(NormalizeOp(0f, 1f))
+            .build()
+    }
 
     private val tflite by lazy {
         Interpreter(
@@ -51,19 +67,7 @@ class CameraXFragment : Fragment() {
     private val tfInputSize by lazy {
         val inputIndex = 0
         val inputShape = tflite.getInputTensor(inputIndex).shape()
-        Size(inputShape[2], inputShape[1]) // Order of axis is: {1, height, width, 3}
-    }
-
-    private val tfImageProcessor by lazy {
-        val cropSize = minOf(bitmapBuffer.width, bitmapBuffer.height)
-        ImageProcessor.Builder()
-            .add(ResizeWithCropOrPadOp(cropSize, cropSize))
-            .add(ResizeOp(
-                tfInputSize.height, tfInputSize.width, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR
-            ))
-            .add(Rot90Op(sudutRotasi / 90))
-            .add(NormalizeOp(0f, 1f))
-            .build()
+        Size(inputShape[2], inputShape[1])
     }
 
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
@@ -89,47 +93,42 @@ class CameraXFragment : Fragment() {
             setShowHideAnimationEnabled(false)
         }
         binding.rbSendok.isFocusable = false
-        binding.rbSendok.rating = 3.0f
+        binding.rbSendok.rating = 2.2f
 
         binding.tvProduct.isSelected = true
-//        binding.viewHasil.visibility = View.GONE
+        binding.viewHasil.visibility = View.VISIBLE
+
+        binding.viewFinder.post { startCamera() }
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         cameraExecutor.shutdown()
-//        binding.viewHasil.visibility = View.GONE
+        binding.viewHasil.visibility = View.GONE
         _binding = null
     }
 
     override fun onResume() {
+        binding.viewFinder.post { startCamera() }
         super.onResume()
-        startCamera()
     }
 
-    private fun startCamera()= binding.viewFinder.post{
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(layoutInflater.context)
-
-        cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
+    private fun scanProduct(cameraProvider: ProcessCameraProvider){
             val preview = Preview.Builder()
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                 .setTargetRotation(binding.viewFinder.display.rotation)
                 .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
 
             val imageAnalysis = ImageAnalysis.Builder()
-                .setTargetRotation(binding.viewFinder.display.rotation)
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+                .setTargetRotation(binding.viewFinder.display.rotation)
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
 
-
             imageAnalysis.setAnalyzer(cameraExecutor, { image ->
-                if(!::bitmapBuffer.isInitialized){
+                if (!::bitmapBuffer.isInitialized) {
                     sudutRotasi = image.imageInfo.rotationDegrees
                     bitmapBuffer = Bitmap.createBitmap(
                         image.width, image.height, Bitmap.Config.ARGB_8888
@@ -138,13 +137,14 @@ class CameraXFragment : Fragment() {
 
                 val tfImage = tfImageProcessor.process(tfImageBuffer.apply { load(bitmapBuffer) })
 
-                val prediction = detector.predict(tfImage)
+                val predictions = detector.predict(tfImage)
 
-                hasilPrediksi(prediction.maxByOrNull { it.score })
+                Log.e("LUAR FUNGSI", predictions.maxByOrNull { it.label }.toString())
+
+                hasilPrediksi(predictions.maxByOrNull { it.score })
             })
 
-
-            try{
+            try {
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     viewLifecycleOwner,
@@ -153,18 +153,28 @@ class CameraXFragment : Fragment() {
                     imageAnalysis
                 )
                 preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-            }catch (ex: Exception){
-                Toast.makeText(layoutInflater.context, "fail to open camera", Toast.LENGTH_SHORT).show()
+            } catch (exc: Exception) {
+                Toast.makeText(
+                    layoutInflater.context,
+                    getString(R.string.failtoopencamera),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }, ContextCompat.getMainExecutor(layoutInflater.context)
-        )
+    }
+
+    private fun startCamera(){
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(layoutInflater.context)
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+            scanProduct(cameraProvider)
+        }, ContextCompat.getMainExecutor(layoutInflater.context))
     }
 
     private fun hasilPrediksi(
         prediksi: ObjectDetectionHelper.ObjectPrediction?
-    )= binding.viewFinder.post{
+    ){
         if (prediksi == null || prediksi.score < ACCURACY_THRESHOLD){
-            binding.viewHasil.visibility = View.GONE
+            binding.viewHasil.visibility = View.VISIBLE
         }else{
             binding.viewHasil.visibility = View.VISIBLE
             binding.tvProduct.text = prediksi.label
@@ -173,7 +183,7 @@ class CameraXFragment : Fragment() {
 
     companion object {
         private const val ACCURACY_THRESHOLD = 0.5f
-        private const val MODEL_PATH = "converted_model.tflite"
-        private const val LABELS_PATH = "converted_labels.txt"
+        private const val MODEL_PATH = "coco_ssd_mobilenet_v1_1.0_quant.tflite"
+        private const val LABELS_PATH = "coco_ssd_mobilenet_v1_1.0_labels.txt"
     }
 }

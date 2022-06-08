@@ -17,7 +17,7 @@ class FavViewModel(application: Application) : ViewModel() {
         mFavRepos.delete(productId)
     }
 
-    fun getAllUsers(): LiveData<List<FavEntity>> = mFavRepos.getAllProduct()
+    fun getAllProduct(): LiveData<List<FavEntity>> = mFavRepos.getAllProduct()
 
     suspend fun isFavorite(productId: String) = mFavRepos.favProduct(productId)
 

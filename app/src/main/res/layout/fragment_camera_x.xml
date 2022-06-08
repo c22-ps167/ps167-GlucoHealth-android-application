@@ -10,7 +10,7 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/switchCamera"
@@ -61,7 +61,7 @@
             android:scrollHorizontally="true"
             android:textColor="@color/black"
             android:layout_margin="10dp"
-            android:textSize="30sp"/>
+            android:textSize="20sp"/>
 
         <RatingBar
             android:id="@+id/rb_sendok"
@@ -71,8 +71,8 @@
             app:layout_constraintStart_toEndOf="@id/img_product"
             android:layout_margin="10dp"
             android:stepSize="0.1"
-            style="@style/CustomRatingBarStyle"
             android:isIndicator="true"
+            style="@style/CustomRatingBarStyle"
             android:numStars="5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
