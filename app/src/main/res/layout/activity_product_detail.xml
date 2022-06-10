@@ -6,4 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ProductDetailActivity">
 
+    <RatingBar
+        android:id="@+id/rb_sendok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:stepSize="0.1"
+        android:isIndicator="true"
+        style="@style/CustomRatingBarStyle"
+        android:numStars="5"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

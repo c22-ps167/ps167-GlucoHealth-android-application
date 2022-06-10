@@ -12,4 +12,6 @@
     <string name="failtoshowdata">FAIL TO SHOW DATA</string>
     <string name="notfound">PRODUCT NOT FOUND</string>
     <string name="failtoopencamera">Fail to open camera</string>
+    <string name="lblGula"><u>Gula Harian</u></string>
+    <string name="lblprogressharian">%s / 50 gram</string>
 </resources>

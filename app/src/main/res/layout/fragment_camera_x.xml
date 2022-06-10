@@ -12,18 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <ImageView
-        android:id="@+id/switchCamera"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/viewFinder"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_switch_camera"
-        tools:ignore="ContentDescription" />
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_hasil"
         android:layout_width="match_parent"
@@ -60,20 +48,51 @@
             android:focusableInTouchMode="true"
             android:scrollHorizontally="true"
             android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:textSize="20sp"/>
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:layout_margin="20dp"
+            android:textSize="25sp"/>
 
-        <RatingBar
-            android:id="@+id/rb_sendok"
+        <TextView
+            android:id="@+id/lbl_gula"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_product"
+            android:text="@string/lblGula"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/img_product"
-            android:layout_margin="10dp"
-            android:stepSize="0.1"
-            android:isIndicator="true"
-            style="@style/CustomRatingBarStyle"
-            android:numStars="5"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_product"/>
+
+        <RelativeLayout
+            android:layout_width="190dp"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/lbl_gula"
+            app:layout_constraintStart_toEndOf="@id/img_product"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ProgressBar
+                android:id="@+id/pg_gulaharian"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/CustomPgBar"/>
+            <TextView
+                android:id="@+id/pg_tvProgress"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="#00000000"
+                android:layout_alignStart="@id/pg_gulaharian"
+                android:layout_alignTop="@id/pg_gulaharian"
+                android:layout_alignEnd="@id/pg_gulaharian"
+                android:layout_alignBottom="@id/pg_gulaharian"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

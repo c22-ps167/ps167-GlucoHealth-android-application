@@ -39,7 +39,6 @@ android {
     }
     aaptOptions {
         noCompress "tflite"
-        noCompress "txt"
     }
 }
 
@@ -77,10 +76,8 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:1.2.0-alpha02"
     implementation "androidx.camera:camera-view:1.2.0-alpha02"
 
-    //tflite
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly-SNAPSHOT'
-    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+    //mlkit
+    implementation 'com.google.mlkit:object-detection-custom:17.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
