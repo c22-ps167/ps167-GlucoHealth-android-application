@@ -14,7 +14,4 @@ interface SugarDao{
 
     @Query("SELECT * from daily_sugar WHERE time = :times ORDER BY number")
     fun getAllConsumtion(times: String): LiveData<List<SugarEntity>>
-
-    @Query("SELECT COUNT(*) FROM daily_sugar WHERE time = :times")
-    fun getCount(times: String): Int
 }

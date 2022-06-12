@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GlucoHealth2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14947916666666666" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable-v24/ic_switch_camera.xml" value="0.1" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/arc.xml" value="0.23177083333333334" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/bottomnaviback.xml" value="0.2755208333333333" />
@@ -27,8 +28,10 @@
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/spoon_empty.xml" value="0.21203703703703702" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/spoon_fill.xml" value="0.21203703703703702" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/drawable/spoonbar.xml" value="0.21203703703703702" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_history.xml" value="0.259375" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_main.xml" value="0.3363994743758213" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_product_detail.xml" value="0.2" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/layout/activity_splash_screen.xml" value="0.259375" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_camera_x.xml" value="0.144" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_favorite.xml" value="0.12962962962962962" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/fragment_home.xml" value="0.13385416666666666" />
@@ -38,6 +41,7 @@
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/item_row_user.xml" value="0.1" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/layout/viewhasil.xml" value="0.215625" />
         <entry key="..\:/GlucoHealth2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
+        <entry key="..\:/GlucoHealth2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26666666666666666" />
       </map>
     </option>
   </component>

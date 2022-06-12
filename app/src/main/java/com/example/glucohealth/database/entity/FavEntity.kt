@@ -17,5 +17,29 @@ class FavEntity(
     val productName: String,
 
     @field:ColumnInfo(name = "imgUrl")
-    val imgUrl: String
+    val imgUrl: String,
+
+    @field:ColumnInfo(name ="saturatedFat")
+    val saturatedFat: Int,
+
+    @field:ColumnInfo(name ="sodium")
+    val sodium: Int,
+
+    @field:ColumnInfo(name ="totalFat")
+    val totalFat: Int,
+
+    @field:ColumnInfo(name ="protein")
+    val protein: Int,
+
+    @field:ColumnInfo(name ="totalCarbohydrate")
+    val totalCarbohydrate: Int,
+
+    @field:ColumnInfo(name ="calories")
+    val calories: Int,
+
+    @field:ColumnInfo(name ="sugar")
+    val sugar: Int,
+
+    @field:ColumnInfo(name ="servingSize")
+    val servingSize: Int
 ): Parcelable

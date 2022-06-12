@@ -1,12 +1,14 @@
 package com.example.glucohealth.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.glucohealth.R
 import com.example.glucohealth.database.entity.FavEntity
+import com.example.glucohealth.database.entity.SugarEntity
 import com.example.glucohealth.databinding.ActivityProductDetailBinding
 import com.example.glucohealth.helper.ViewModelFactory
 import com.example.glucohealth.viewmodels.FavViewModel
@@ -22,23 +24,28 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private lateinit var viewModel : SugarViewModel
     private lateinit var favViewModel: FavViewModel
-    var sugarConsum = 0
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
+        super.onCreate(savedInstanceState)
+        val currentDate = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val hourSec = SimpleDateFormat("hhmmss")
+        val formathoursec = hourSec.format(currentDate)
+        val formatedTime = dateFormat.format(currentDate)
         val productName = intent.getStringExtra(EXTRA_PRODUCTNAME) ?: ""
         val kalori = intent.getIntExtra(EXTRA_CALORIES, 0)
         val protein = intent.getIntExtra(EXTRA_PROTEIN, 0)
         val lemak = intent.getIntExtra(EXTRA_FAT, 0)
+        val lemakjenuh = intent.getIntExtra(EXTRA_SATFAT, 0)
         val takaran = intent.getIntExtra(EXTRA_SERVINGSIZE, 0)
         val garam = intent.getIntExtra(EXTRA_SODIUM, 0)
         val gula = intent.getIntExtra(EXTRA_SUGAR, 0)
         val karbohidrat = intent.getIntExtra(EXTRA_CARBO, 0)
         val imgUrl = intent.getStringExtra(EXTRA_IMGURL) ?: ""
         val productid = intent.getStringExtra(EXTRA_PRODUCTID) ?: ""
-
+        val productFav = FavEntity(productid, productName, imgUrl, lemakjenuh, garam, lemak, protein, karbohidrat, kalori, gula, takaran)
         val rumus = (gula / 5.0)
         binding.rbSendok.rating = rumus.toFloat()
 
@@ -55,19 +62,16 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.tvBanyakkarbohidrat.text = getString(R.string.komposisi).format(karbohidrat)
         binding.tvBanyaklemak.text = getString(R.string.komposisi).format(lemak)
         binding.tvBanyakprotein.text = getString(R.string.komposisi).format(protein)
+        binding.tvBanyaklemakjenuh.text = getString(R.string.komposisi).format(lemakjenuh)
         binding.lblTambahan.text = getString(R.string.tambah).format(gula)
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val formatedTime = dateFormat.format(currentDate)
 
         viewModel.getAllProduct(formatedTime).observe(this){product->
+            var konsumsi = 0
             product.forEach {
-                sugarConsum += it.sugar
+                konsumsi += it.sugar
             }
-            setpgProgress(gula + sugarConsum)
+            setpgProgress(gula + konsumsi)
         }
-
-        val productFav = FavEntity(productid, productName, imgUrl)
 
         var isChecked = false
         CoroutineScope(Dispatchers.IO).launch {
@@ -81,6 +85,15 @@ class ProductDetailActivity : AppCompatActivity() {
                     binding.toggleFavorite.isChecked = isChecked
                 }
             }
+        }
+
+        val sugarEntity = SugarEntity(formathoursec, formatedTime, gula)
+
+        binding.btnKonsumsi.setOnClickListener {
+            viewModel.insert(sugarEntity)
+            val toHome = Intent(this, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(toHome)
         }
 
         binding.toggleFavorite.setOnClickListener {
@@ -104,6 +117,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     companion object{
         const val EXTRA_PRODUCTID = "extra_productid"
+        const val EXTRA_SATFAT = "extra_satfat"
         const val EXTRA_PRODUCTNAME = "extra_productname"
         const val EXTRA_CALORIES = "extra_calories"
         const val EXTRA_PROTEIN = "extra_protein"

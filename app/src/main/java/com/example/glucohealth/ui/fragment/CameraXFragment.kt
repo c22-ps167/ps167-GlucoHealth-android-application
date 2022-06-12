@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -108,10 +111,7 @@ class CameraXFragment : Fragment() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(layoutInflater.context)
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder()
-                .setTargetAspectRatio(AspectRatio.RATIO_4_3)
-                .setTargetRotation(binding.viewFinder.display.rotation)
-                .build()
+            val preview = Preview.Builder().build()
             preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
 
             imageCapture = ImageCapture.Builder().build()
@@ -179,10 +179,9 @@ class CameraXFragment : Fragment() {
             binding.tvProduct.text = product.name
             val sugar = product.nutritionFact.sugar ?: 0
             binding.lblTambahan.text = getString(R.string.tambah).format(sugar)
-            binding.pgTvProgress.text = getString(R.string.lblprogressharian).format(sugar + sugarConsum)
             setProgress(sugar + sugarConsum)
             Glide.with(layoutInflater.context).load(product.url).into(binding.imgProduct)
-            binding.viewHasil.setOnClickListener{ _->
+            binding.viewHasil.setOnClickListener{
                 productDetail(product.name, product.url, product.nutritionFact, productId)
             }
         }
@@ -192,6 +191,7 @@ class CameraXFragment : Fragment() {
     private fun setProgress(sugar: Int){
         val konsumsi = ((sugar / 50.0) * 100.0).toInt()
         binding.pgGulaharian.progress = konsumsi
+        binding.pgTvProgress.text = getString(R.string.lblprogressharian).format(sugar)
     }
 
     private fun productDetail(productName: String, imgUrl: String, Nutrition: NutritionFact, productId: String){
@@ -200,12 +200,13 @@ class CameraXFragment : Fragment() {
             .putExtra(ProductDetailActivity.EXTRA_IMGURL, imgUrl)
             .putExtra(ProductDetailActivity.EXTRA_CALORIES, Nutrition.calories)
             .putExtra(ProductDetailActivity.EXTRA_PROTEIN,Nutrition.protein)
-            .putExtra(ProductDetailActivity.EXTRA_FAT, Nutrition.saturatedFat)
+            .putExtra(ProductDetailActivity.EXTRA_FAT, Nutrition.totalFat)
             .putExtra(ProductDetailActivity.EXTRA_SERVINGSIZE, Nutrition.servingSize)
             .putExtra(ProductDetailActivity.EXTRA_SODIUM, Nutrition.sodium)
             .putExtra(ProductDetailActivity.EXTRA_SUGAR, Nutrition.sugar)
             .putExtra(ProductDetailActivity.EXTRA_CARBO, Nutrition.totalCarbohydrate)
             .putExtra(ProductDetailActivity.EXTRA_PRODUCTID, productId)
+            .putExtra(ProductDetailActivity.EXTRA_SATFAT, Nutrition.saturatedFat)
         startActivity(descriptionIntent)
     }
 

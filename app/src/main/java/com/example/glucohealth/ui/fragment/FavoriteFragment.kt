@@ -14,16 +14,13 @@ import com.example.glucohealth.adapter.FavRvAdapter
 import com.example.glucohealth.database.entity.FavEntity
 import com.example.glucohealth.databinding.FragmentFavoriteBinding
 import com.example.glucohealth.helper.ViewModelFactory
-import com.example.glucohealth.response.DataItem
 import com.example.glucohealth.ui.activity.ProductDetailActivity
 import com.example.glucohealth.viewmodels.FavViewModel
-import com.example.glucohealth.viewmodels.ProductViewModel
 
 class FavoriteFragment : Fragment() {
     private var _binding : FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: FavViewModel
-    private lateinit var viewModelApi: ProductViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +29,6 @@ class FavoriteFragment : Fragment() {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity?)?.supportActionBar?.show()
         viewModel = obtainViewModel(requireActivity())
-        viewModelApi = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[ProductViewModel::class.java]
         generateFavorite()
 
         return binding.root
@@ -60,33 +56,25 @@ class FavoriteFragment : Fragment() {
         }
         listFavoriteAdapter.setOnItemClickCallback(object : FavRvAdapter.OnItemClickCallback{
             override fun onItemClicked(data: FavEntity) {
-                selecteditem(data.productId)
+                showSelectedProduct(data)
             }
 
         })
     }
 
-    private fun selecteditem(productId: String){
-        viewModelApi.getProductDetail(productId)
-        viewModelApi.detailProduct.observe(viewLifecycleOwner){
-            viewModelApi.detailProduct.removeObservers(viewLifecycleOwner)
-            showSelectedProduct(it)
-        }
-    }
-
-    private fun showSelectedProduct(product: DataItem){
-        val productNutritionFact = product.nutritionFact
+    private fun showSelectedProduct(product: FavEntity){
         val toProductDetail = Intent(layoutInflater.context, ProductDetailActivity::class.java)
-            .putExtra(ProductDetailActivity.EXTRA_PRODUCTNAME, product.name)
-            .putExtra(ProductDetailActivity.EXTRA_IMGURL, product.url)
-            .putExtra(ProductDetailActivity.EXTRA_CALORIES, productNutritionFact.calories)
-            .putExtra(ProductDetailActivity.EXTRA_PROTEIN,productNutritionFact.protein)
-            .putExtra(ProductDetailActivity.EXTRA_FAT, productNutritionFact.saturatedFat)
-            .putExtra(ProductDetailActivity.EXTRA_SERVINGSIZE, productNutritionFact.servingSize)
-            .putExtra(ProductDetailActivity.EXTRA_SODIUM, productNutritionFact.sodium)
-            .putExtra(ProductDetailActivity.EXTRA_SUGAR, productNutritionFact.sugar)
-            .putExtra(ProductDetailActivity.EXTRA_CARBO, productNutritionFact.totalCarbohydrate)
-            .putExtra(ProductDetailActivity.EXTRA_PRODUCTID, product.id)
+            .putExtra(ProductDetailActivity.EXTRA_PRODUCTNAME, product.productName)
+            .putExtra(ProductDetailActivity.EXTRA_IMGURL, product.imgUrl)
+            .putExtra(ProductDetailActivity.EXTRA_CALORIES, product.calories)
+            .putExtra(ProductDetailActivity.EXTRA_PROTEIN,product.protein)
+            .putExtra(ProductDetailActivity.EXTRA_FAT, product.totalFat)
+            .putExtra(ProductDetailActivity.EXTRA_SERVINGSIZE, product.servingSize)
+            .putExtra(ProductDetailActivity.EXTRA_SODIUM, product.sodium)
+            .putExtra(ProductDetailActivity.EXTRA_SUGAR, product.sugar)
+            .putExtra(ProductDetailActivity.EXTRA_CARBO, product.totalCarbohydrate)
+            .putExtra(ProductDetailActivity.EXTRA_PRODUCTID, product.productId)
+            .putExtra(ProductDetailActivity.EXTRA_SATFAT, product.saturatedFat)
         startActivity(toProductDetail)
     }
 

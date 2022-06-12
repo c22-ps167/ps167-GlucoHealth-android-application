@@ -104,12 +104,13 @@ class SearchFragment : Fragment() {
             .putExtra(ProductDetailActivity.EXTRA_IMGURL, product.url)
             .putExtra(ProductDetailActivity.EXTRA_CALORIES, productNutritionFact.calories)
             .putExtra(ProductDetailActivity.EXTRA_PROTEIN,productNutritionFact.protein)
-            .putExtra(ProductDetailActivity.EXTRA_FAT, productNutritionFact.saturatedFat)
+            .putExtra(ProductDetailActivity.EXTRA_FAT, productNutritionFact.totalFat)
             .putExtra(ProductDetailActivity.EXTRA_SERVINGSIZE, productNutritionFact.servingSize)
             .putExtra(ProductDetailActivity.EXTRA_SODIUM, productNutritionFact.sodium)
             .putExtra(ProductDetailActivity.EXTRA_SUGAR, productNutritionFact.sugar)
             .putExtra(ProductDetailActivity.EXTRA_CARBO, productNutritionFact.totalCarbohydrate)
             .putExtra(ProductDetailActivity.EXTRA_PRODUCTID, product.id)
+            .putExtra(ProductDetailActivity.EXTRA_SATFAT, productNutritionFact.saturatedFat)
         startActivity(toUserDetail)
     }
 

@@ -16,15 +16,6 @@ class SugarEntity (
     @field:ColumnInfo(name = "time")
     val time: String,
 
-    @field:ColumnInfo(name = "productId")
-    val productId: String,
-
-    @field:ColumnInfo(name = "productName")
-    val productName: String,
-
-    @field:ColumnInfo(name = "imgUrl")
-    val imgUrl: String,
-
     @field:ColumnInfo(name = "sugar")
     val sugar: Int
 

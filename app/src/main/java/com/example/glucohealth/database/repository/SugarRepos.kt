@@ -16,8 +16,6 @@ class SugarRepos (application: Application){
         mSugarDao = db.sugarDao()
     }
 
-    fun getCount(time: String) = mSugarDao.getCount(time)
-
     fun getAllConsumtion(time: String) = mSugarDao.getAllConsumtion(time)
 
     fun insert(sugar: SugarEntity){

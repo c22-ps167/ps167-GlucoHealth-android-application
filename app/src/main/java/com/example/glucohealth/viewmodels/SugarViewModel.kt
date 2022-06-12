@@ -15,6 +15,4 @@ class SugarViewModel(application: Application) : ViewModel() {
 
     fun getAllProduct(time: String): LiveData<List<SugarEntity>> = mSugarRepos.getAllConsumtion(time)
 
-    fun count(time: String) = mSugarRepos.getCount(time)
-
 }
