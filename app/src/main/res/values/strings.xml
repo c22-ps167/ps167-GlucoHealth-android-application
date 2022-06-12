@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">GlucoHealth</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name" translatable="false">GlucoHealth</string>
     <string name="lbl_product">Product Name</string>
     <string name="hint_search">Search Product…</string>
     <string name="lbl_search">SEARCH</string>
@@ -18,8 +17,9 @@
     <string name="lbltvkarbohidrat">Carbohidrate</string>
     <string name="lbltvgaram">Sodium</string>
     <string name="lbltvlemak">Fat</string>
+    <string name="lbltvlemakjenuh">Saturated Fat</string>
     <string name="lbltvprotein">Protein</string>
     <string name="lbltvkalori">Calories</string>
     <string name="lbltvgula">Sugar</string>
-    <string name="takaran">Takaran Saji : %s mL</string>
+    <string name="takaran">Serving Size : %s mL</string>
 </resources>
