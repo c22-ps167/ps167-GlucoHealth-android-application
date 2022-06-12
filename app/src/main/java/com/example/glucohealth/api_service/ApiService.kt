@@ -1,13 +1,12 @@
 package com.example.glucohealth.api_service
 
 import com.example.glucohealth.BuildConfig
+import com.example.glucohealth.response.PredictItem
 import com.example.glucohealth.response.ProductDetail
 import com.example.glucohealth.response.SearchResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("/api/p/{id}")
@@ -23,5 +22,11 @@ interface ApiService {
         @Query(value = "page") page: Int? = 1,
         @Query(value = "size") size: Int? = 10
     ): Call<SearchResponse>
+
+    @POST("predict")
+    @Multipart
+    fun getPrediction(
+        @Part file: MultipartBody.Part
+    ): Call<PredictItem>
 
 }

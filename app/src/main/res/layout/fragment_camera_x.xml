@@ -12,88 +12,132 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_hasil"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
+    <ImageView
+        android:id="@+id/captureImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/ic_capture"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="80dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/roundcornerwhite">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/img_product"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="15dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wrapper_hasil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/lblclose"
+            android:background="@drawable/arc"
+            app:layout_constraintBottom_toTopOf="@id/view_hasil"
+            app:layout_constraintStart_toStartOf="@id/view_hasil"
+            app:layout_constraintEnd_toEndOf="@id/view_hasil"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_hasil"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_baseline_settings_24"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/img_product"
-            app:layout_constraintTop_toTopOf="parent"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit ="marquee_forever"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:scrollHorizontally="true"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:layout_margin="20dp"
-            android:textSize="25sp"/>
-
-        <TextView
-            android:id="@+id/lbl_gula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblGula"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_marginBottom="80dp"
             android:layout_marginStart="10dp"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/img_product"
-            app:layout_constraintTop_toBottomOf="@id/tv_product"/>
-
-        <RelativeLayout
-            android:layout_width="190dp"
-            android:layout_height="20dp"
-            app:layout_constraintTop_toBottomOf="@id/lbl_gula"
-            app:layout_constraintStart_toEndOf="@id/img_product"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ProgressBar
-                android:id="@+id/pg_gulaharian"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/CustomPgBar"/>
+            android:background="@drawable/roundcornerwhite">
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="ContentDescription" />
+
             <TextView
-                android:id="@+id/pg_tvProgress"
+                android:id="@+id/tv_product"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/img_product"
+                app:layout_constraintTop_toTopOf="parent"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/lbl_gula"
                 android:layout_width="wrap_content"
-                android:background="#00000000"
-                android:layout_alignStart="@id/pg_gulaharian"
-                android:layout_alignTop="@id/pg_gulaharian"
-                android:layout_alignEnd="@id/pg_gulaharian"
-                android:layout_alignBottom="@id/pg_gulaharian"
+                android:layout_height="wrap_content"
+                android:text="@string/lblgula"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                />
-        </RelativeLayout>
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/img_product"
+                app:layout_constraintTop_toBottomOf="@id/tv_product"/>
 
+            <TextView
+                android:id="@+id/lbl_tambahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/lbl_gula"
+                app:layout_constraintTop_toBottomOf="@id/tv_product"/>
+
+            <RelativeLayout
+                android:layout_width="190dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@id/lbl_gula"
+                app:layout_constraintStart_toEndOf="@id/img_product"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ProgressBar
+                    android:id="@+id/pg_gulaharian"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/CustomPgBar"/>
+                <TextView
+                    android:id="@+id/pg_tvProgress"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_alignStart="@id/pg_gulaharian"
+                    android:layout_alignTop="@id/pg_gulaharian"
+                    android:layout_alignEnd="@id/pg_gulaharian"
+                    android:layout_alignBottom="@id/pg_gulaharian"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

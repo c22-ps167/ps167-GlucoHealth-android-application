@@ -25,8 +25,12 @@
                     android:radius="10dp"/>
                 <gradient
                     android:startColor="@color/green"
-                    android:endColor="@color/white"
-                    android:angle="90"/>
+                    android:endColor="@color/red"
+                    android:centerColor="@color/yellow"
+                    android:angle="0"/>
+                <stroke
+                    android:color="@color/gray"
+                    android:width="0.5dp"/>
             </shape>
         </clip>
     </item>

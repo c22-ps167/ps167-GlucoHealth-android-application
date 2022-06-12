@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.glucohealth.BuildConfig
 import com.example.glucohealth.api_service.ApiConfig
-import com.example.glucohealth.response.SearchResponse
 import com.example.glucohealth.response.DataItem
+import com.example.glucohealth.response.PredictItem
 import com.example.glucohealth.response.ProductDetail
+import com.example.glucohealth.response.SearchResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +26,9 @@ class ProductViewModel: ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isloading: LiveData<Boolean> = _isLoading
 
+    private val _predict = MutableLiveData<String>()
+    val predict: LiveData<String> = _predict
+
     private val _isNotFound = MutableLiveData<Boolean>()
     val isNotFound: LiveData<Boolean> = _isNotFound
 
@@ -31,7 +37,7 @@ class ProductViewModel: ViewModel() {
 
     fun getSearchResponse(query: String){
         _isLoading.value = true
-        val client = ApiConfig.getApiService().searchProduct(query)
+        val client = ApiConfig.getApiService(BuildConfig.SITUS).searchProduct(query)
         client.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(
                 call: Call<SearchResponse>,
@@ -64,7 +70,7 @@ class ProductViewModel: ViewModel() {
 
     fun getProductDetail(query: String){
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getProduct(query)
+        val client = ApiConfig.getApiService(BuildConfig.SITUS).getProduct(query)
         client.enqueue(object : Callback<ProductDetail> {
             override fun onResponse(
                 call: Call<ProductDetail>,
@@ -80,6 +86,30 @@ class ProductViewModel: ViewModel() {
             }
             override fun onFailure(call: Call<ProductDetail>, t: Throwable) {
                 _isLoading.value = false
+                Log.e("ERROR!", "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    fun getPrediction(image: MultipartBody.Part){
+        _predict.value = ""
+        val client = ApiConfig.getApiService(BuildConfig.PREDICT).getPrediction(image)
+        client.enqueue(object : Callback<PredictItem> {
+            override fun onResponse(
+                call: Call<PredictItem>,
+                response: Response<PredictItem>
+            ) {
+                _predict.value = ""
+                val responseBody = response.body()
+                if (response.isSuccessful && responseBody != null) {
+                    _predict.value = responseBody.data
+                } else {
+                    Log.e("ERROR!", "onFailure: ${response.message()}")
+                        _predict.value = ""
+                }
+            }
+            override fun onFailure(call: Call<PredictItem>, t: Throwable) {
+                _predict.value = ""
                 Log.e("ERROR!", "onFailure: ${t.message}")
             }
         })

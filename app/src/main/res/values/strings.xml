@@ -12,6 +12,20 @@
     <string name="failtoshowdata">FAIL TO SHOW DATA</string>
     <string name="notfound">PRODUCT NOT FOUND</string>
     <string name="failtoopencamera">Fail to open camera</string>
-    <string name="lblGula"><u>Gula Harian</u></string>
+    <string name="lblgula">Daily Sugar</string>
+    <string name="lblgulasendok">Sugar In Teaspoon</string>
     <string name="lblprogressharian">%s / 50 gram</string>
+    <string name="failTakePicture">FAIL TO TAKE PICTURE</string>
+    <string name="lblclose">CLOSE</string>
+    <string name="tambah">+ %s gram</string>
+    <string name="komposisi">%s gram</string>
+    <string name="lblConsum">consumption</string>
+    <string name="lbltvkarbohidrat">Carbohidrate</string>
+    <string name="lbltvgaram">Sodium</string>
+    <string name="lbltvlemak">Fat</string>
+    <string name="lbltvprotein">Protein</string>
+    <string name="lbltvkalori">Calories</string>
+    <string name="lbltvgula">Sugar</string>
+    <string name="titleproductdetail">Product Detail</string>
+    <string name="takaran">Takaran Saji : %s mL</string>
 </resources>

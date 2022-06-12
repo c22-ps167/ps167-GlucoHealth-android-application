@@ -24,7 +24,7 @@ class FavRvAdapter: RecyclerView.Adapter<FavRvAdapter.ViewHolder>() {
         Glide.with(holder.itemView)
             .load(productList.imgUrl)
             .into(holder.binding.imgItemPhoto)
-        holder.itemView.setOnClickListener { listProduct[holder.adapterPosition] }
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listProduct[holder.adapterPosition]) }
     }
 
     override fun getItemCount() = listProduct.size

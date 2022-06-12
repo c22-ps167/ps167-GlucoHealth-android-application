@@ -25,6 +25,11 @@ data class ProductDetail(
 	val status: String
 )
 
+data class PredictItem(
+	@field:SerializedName("data")
+	val data: String
+)
+
 data class DataItem(
 
 	@field:SerializedName("nutritionFact")
@@ -34,16 +39,16 @@ data class DataItem(
 	val createdAt: Long? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String,
 
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: Any? = null,
 
 	@field:SerializedName("url")
-	val url: String? = null
+	val url: String
 )
 
 data class NutritionFact(

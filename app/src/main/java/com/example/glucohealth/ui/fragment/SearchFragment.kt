@@ -1,5 +1,6 @@
 package com.example.glucohealth.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.glucohealth.R
 import com.example.glucohealth.adapter.SearchRVAdapter
 import com.example.glucohealth.databinding.FragmentSearchBinding
 import com.example.glucohealth.response.DataItem
+import com.example.glucohealth.ui.activity.ProductDetailActivity
 import com.example.glucohealth.viewmodels.ProductViewModel
 
 class SearchFragment : Fragment() {
@@ -81,9 +83,8 @@ class SearchFragment : Fragment() {
         }
         listSearchAdapter.setOnItemClickCallback(object : SearchRVAdapter.OnItemClickCallback{
             override fun onItemClicked(data: DataItem) {
-                Toast.makeText(layoutInflater.context, data.name.toString(), Toast.LENGTH_SHORT).show()
+                showSelectedData(data)
             }
-
         })
     }
 
@@ -96,11 +97,21 @@ class SearchFragment : Fragment() {
         }
     }
 
-//    private fun showSelectedData(user: DataItem) {
-//        val toUserDetail = Intent(context, UserActivity::class.java)
-//            .putExtra(UserActivity.EXRA_USERS, user.login)
-//        startActivity(toUserDetail)
-//    }
+    private fun showSelectedData(product: DataItem) {
+        val productNutritionFact = product.nutritionFact
+        val toUserDetail = Intent(layoutInflater.context, ProductDetailActivity::class.java)
+            .putExtra(ProductDetailActivity.EXTRA_PRODUCTNAME, product.name)
+            .putExtra(ProductDetailActivity.EXTRA_IMGURL, product.url)
+            .putExtra(ProductDetailActivity.EXTRA_CALORIES, productNutritionFact.calories)
+            .putExtra(ProductDetailActivity.EXTRA_PROTEIN,productNutritionFact.protein)
+            .putExtra(ProductDetailActivity.EXTRA_FAT, productNutritionFact.saturatedFat)
+            .putExtra(ProductDetailActivity.EXTRA_SERVINGSIZE, productNutritionFact.servingSize)
+            .putExtra(ProductDetailActivity.EXTRA_SODIUM, productNutritionFact.sodium)
+            .putExtra(ProductDetailActivity.EXTRA_SUGAR, productNutritionFact.sugar)
+            .putExtra(ProductDetailActivity.EXTRA_CARBO, productNutritionFact.totalCarbohydrate)
+            .putExtra(ProductDetailActivity.EXTRA_PRODUCTID, product.id)
+        startActivity(toUserDetail)
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
